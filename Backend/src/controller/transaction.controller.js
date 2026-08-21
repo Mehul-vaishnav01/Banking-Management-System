@@ -44,5 +44,40 @@ const emailService=require('../services/email.service')
             })
         }
 
-        
+        /**
+         * 2.Validate IdempotencyKey
+         */
+
+        const isTransactionAlreadyExist=await transactionModel.findOne({
+            idempotencyKey:idempotencyKey
+        })
+
+        if(isTransactionAlreadyExist)
+        {
+            if(isTransactionAlreadyExist.status==='Completed')
+            {
+                res.status(200).json({
+                    message:"Transaction already processed",
+                    transaction:isTransactionAlreadyExist
+                })
+            }
+            if(isTransactionAlreadyExist.status==='Pending')
+            {
+                res.status(200).json({
+                    message:"Transaction already processing"
+                })
+            }
+            if(isTransactionAlreadyExist.status==='Failed')
+            {
+                res.status(500).json({
+                    message:"Transaction processing failed , plese retry"
+                })
+            }
+            if(isTransactionAlreadyExist.status==='Reversed')
+            {
+                res.status(500).json({
+                    message:"Transaction processing reversed , plese retry"
+                })
+            }
+        }
     }
