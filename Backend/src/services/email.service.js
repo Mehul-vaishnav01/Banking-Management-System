@@ -72,6 +72,106 @@ The Banking Management System Team
     await sendEmail(userEmail, subject, text, html);
 }
 
+async function sendTransactionEmail(userEmail, name, amount, toAccount)
+{
+    const subject = "Transaction Successful - Bank System";
+
+    const text = `Hi ${name},
+
+Your transaction has been successfully completed.
+
+Transaction Details:
+Amount: ₹${amount}
+Transferred To Account: ${toAccount}
+
+If you did not perform this transaction, please contact the bank immediately.
+
+Best Regards,
+Pratik Lachwani
+Founder`;
+
+    const html = `
+        <h2>Transaction Successful</h2>
+
+        <p>Hi ${name},</p>
+
+        <p>
+            Your transaction has been successfully completed.
+        </p>
+
+        <h3>Transaction Details</h3>
+
+        <p><strong>Amount:</strong> ₹${amount}</p>
+        <p><strong>Transferred To:</strong> ${toAccount}</p>
+
+        <p>
+            If you did not perform this transaction, please contact
+            the bank immediately.
+        </p>
+
+        <br>
+
+        <p>Best Regards,</p>
+        <p><strong>Pratik Lachwani</strong></p>
+        <p>Founder</p>
+    `;
+
+    await sendEmail(userEmail, subject, text, html);
+}
+
+
+async function sendTransactionFailureEmail(userEmail, name, amount, toAccount)
+{
+    const subject = "Transaction Failed - Bank System";
+
+    const text = `Hi ${name},
+
+Your attempted transaction could not be completed.
+
+Transaction Details:
+Amount: ₹${amount}
+Attempted Transfer To Account: ${toAccount}
+
+Please check your account balance and transaction details and try again.
+
+If you believe this was an error, please contact the bank.
+
+Best Regards,
+Pratik Lachwani
+Founder`;
+
+    const html = `
+        <h2>Transaction Failed</h2>
+
+        <p>Hi ${name},</p>
+
+        <p>
+            Unfortunately, your attempted transaction could not be completed.
+        </p>
+
+        <h3>Transaction Details</h3>
+
+        <p><strong>Amount:</strong> ₹${amount}</p>
+        <p><strong>Attempted Transfer To:</strong> ${toAccount}</p>
+
+        <p>
+            Please check your account balance and transaction details
+            and try again.
+        </p>
+
+        <p>
+            If you believe this was an error, please contact the bank.
+        </p>
+
+        <br>
+
+        <p>Best Regards,</p>
+        <p><strong>Pratik Lachwani</strong></p>
+        <p>Founder</p>
+    `;
+
+    await sendEmail(userEmail, subject, text, html);
+}
 async function sendLoginEmail(userEmail, name) {
     const subject = "Login Successful - Banking Management System";
 
@@ -107,4 +207,4 @@ The Banking Management System Team
     await sendEmail(userEmail, subject, text, html);
 }
 
-module.exports = {sendRegistrationEmail,sendLoginEmail};
+module.exports = {sendRegistrationEmail,sendLoginEmail,sendTransactionFailureEmail,sendTransactionEmail};

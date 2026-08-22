@@ -55,7 +55,7 @@ accountSchema.methods.getBlance=async function () {
         },
         {
             $project:{
-                _id=0,
+                _id:0,
                 balance:{$subtract:["totalCredit","totalDebit"]}
             }
         }
