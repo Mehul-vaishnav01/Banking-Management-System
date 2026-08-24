@@ -26,13 +26,13 @@ const transactionSchema=new mongoose.Schema({
         required:[true,"Amount is requried for creating a transaction"],
         min:[0, "Transaction amount cannt be negetive"]
     },
-    idempotencykey:{
+    IdempotencyKey:{
         type:String,
         required:[true,"Idempotency Key is required for creating a transaction"],
         index:true,
         unique:true
     }
-},{
+},{         
     timestamps:true
 })
 

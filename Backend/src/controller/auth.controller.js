@@ -3,6 +3,7 @@ const jwt=require('jsonwebtoken');
 const emailService=require('../services/email.service')
 
 
+
 async function userRegisterController(req,res){
 
     const{ name,email,password }=req.body
